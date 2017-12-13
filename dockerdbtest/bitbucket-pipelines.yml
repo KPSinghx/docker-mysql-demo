@@ -1,0 +1,13 @@
+image: maven:3.3.9
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - maven
+        script: 
+          - mvn package docker:build
+          - docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS
+          - docker push kuldeep99/dbtest:latest        
+options:
+  docker: true
